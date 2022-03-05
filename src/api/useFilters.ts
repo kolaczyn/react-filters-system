@@ -1,15 +1,17 @@
 import React, { Reducer, useReducer } from "react";
 
-type Filters = {
+type FiltersState = {
   search?: string;
   priceFrom?: number;
   priceTo?: number;
+  statuses: string[];
 };
 
-export const initialStateFilters: Filters = {
+export const initialStateFilters: FiltersState = {
   search: "woda",
   priceFrom: null,
   priceTo: null,
+  statuses: [],
 };
 
 type FilterActions =
@@ -18,14 +20,24 @@ type FilterActions =
     }
   | {
       type: "SET_FILTERS";
-      payload: Filters;
+      payload: FiltersState;
     }
   | {
       type: "SET_SEARCH";
       payload: string;
+    }
+  | {
+      type: "ADD_STATUS";
+      payload: string;
+    }
+  | {
+      type: "REMOVE_STATUS";
+      payload: string;
     };
-
-export const filtersReducer = (state: Filters, action: FilterActions) => {
+export const filtersReducer = (
+  state: FiltersState,
+  action: FilterActions
+): FiltersState => {
   switch (action.type) {
     case "RESET_FILTERS":
       return initialStateFilters;
@@ -36,13 +48,20 @@ export const filtersReducer = (state: Filters, action: FilterActions) => {
       };
     case "SET_FILTERS":
       return action.payload;
+    case "ADD_STATUS":
+      return { ...state, statuses: [...state.statuses, action.payload] };
+    case "REMOVE_STATUS":
+      return {
+        ...state,
+        statuses: state.statuses.filter((id) => id !== action.payload),
+      };
     default:
       return state;
   }
 };
 
 export const FiltersContext = React.createContext<{
-  state?: Filters;
+  state?: FiltersState;
   dispatch: React.Dispatch<FilterActions>;
 }>({
   state: null,

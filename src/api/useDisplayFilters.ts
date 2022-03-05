@@ -1,5 +1,6 @@
 import { FiltersContext } from "./useFilters";
 import { useContext } from "react";
+import useFiltersApi from "./useFiltersApi";
 
 type DisplayFilterData = {
   text: string;
@@ -8,10 +9,28 @@ type DisplayFilterData = {
 
 export const useDisplayFilters = (): DisplayFilterData[] => {
   const { state, dispatch } = useContext(FiltersContext);
+  const { isLoading, data } = useFiltersApi();
+
+  const getFilterName = (filterId): string | null =>
+    isLoading ? null : data.find((f) => f.id === filterId)?.name;
+  console.log({ data, statuses: state.statuses });
 
   const handleCloseSearch = () => {
     dispatch({ type: "SET_SEARCH", payload: "" });
   };
 
-  return [{ text: state.search, onClose: handleCloseSearch }];
+  const searchDisplayFilter = {
+    text: state.search,
+    onClose: handleCloseSearch,
+  };
+  const statusesDisplayFilters: DisplayFilterData[] = isLoading
+    ? []
+    : state.statuses.map((statusId) => ({
+        text: getFilterName(statusId),
+        onClose: () => dispatch({ type: "REMOVE_STATUS", payload: statusId }),
+      }));
+
+  return [searchDisplayFilter, ...statusesDisplayFilters].filter(
+    (d) => d.text !== ""
+  );
 };
