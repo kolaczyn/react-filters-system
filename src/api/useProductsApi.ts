@@ -1,3 +1,4 @@
+import { URL_PRODUCTS_API } from "./apiurls";
 import { FiltersState } from "./../hooks/useFilters";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -5,8 +6,6 @@ import { stringify } from "query-string";
 import { FiltersContext } from "../hooks/useFilters";
 import { useContext, useEffect, useState } from "react";
 import { ProductApiDto } from "./dtoTypes";
-
-const URL_PRODUCTS_API = "https://v5stg.rossmann.pl/products/v3/api/Products";
 
 export const makeRequestToProductApi = async (
   queryString: string

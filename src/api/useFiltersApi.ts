@@ -1,11 +1,9 @@
+import { FILTERS_API_URL } from "./apiurls";
 import { stringify } from "query-string";
 import { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { FiltersContext } from "../hooks/useFilters";
 import { FiltersDataDto, FiltersDto } from "./dtoTypes";
-
-const FILTERS_API_URL =
-  "https://v5stg.rossmann.pl/products/v2/api/Products/filters";
 
 const makeRequestToFiltersApi = async (
   queryString
