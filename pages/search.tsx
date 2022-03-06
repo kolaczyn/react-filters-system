@@ -1,5 +1,5 @@
 import { AvailableStatuses } from "../src/components/productCatalog/AvailableFilters";
-import { SelectedFilters as SelectedFilters } from "../src/components/productCatalog/DisplayFiilters";
+import { SelectedFilters as SelectedFilters } from "../src/components/productCatalog/SelectedFilters";
 import { AppBody } from "../src/components/layout/AppBody";
 import ProductsCatalog from "../src/components/productCatalog/ProductCatalog";
 import { ProductCatalogPagination } from "../src/components/productCatalog/ProductCatalogPagination";
