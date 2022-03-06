@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { FiltersContext } from "../../hooks/useFilters";
 import useFiltersApi from "../../api/useFiltersApi";
+import { Loading } from "../common/Loading";
 
 export const AvailableFilters = () => {
   const { isLoading, data } = useFiltersApi();
@@ -18,7 +19,7 @@ export const AvailableFilters = () => {
   };
 
   return isLoading ? (
-    <h2>loading</h2>
+    <Loading />
   ) : (
     <>
       <hr />
