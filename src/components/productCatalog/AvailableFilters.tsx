@@ -3,7 +3,7 @@ import { FiltersContext } from "../../hooks/useFilters";
 import useFiltersApi from "../../api/useFiltersApi";
 import { Loading } from "../common/Loading";
 
-export const AvailableFilters = () => {
+export const AvailableStatuses = () => {
   const { isLoading, data } = useFiltersApi();
   const { state: flitersState, dispatch } = useContext(FiltersContext);
   const activeStatuses = flitersState.statuses;
@@ -23,13 +23,13 @@ export const AvailableFilters = () => {
   ) : (
     <>
       <hr />
-      {data.map((filter) => (
+      {data.map((status) => (
         <button
-          onClick={() => handleStatusClick(filter.id)}
-          className={isStatusActive(filter.id) ? `is-active button` : "button"}
-          key={filter.id}
+          onClick={() => handleStatusClick(status.id)}
+          className={isStatusActive(status.id) ? `is-active button` : "button"}
+          key={status.id}
         >
-          {filter.name}
+          {status.name}
         </button>
       ))}
     </>

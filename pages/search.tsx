@@ -1,5 +1,5 @@
-import { AvailableFilters } from "../src/components/productCatalog/AvailableFilters";
-import { DisplayFilters } from "../src/components/productCatalog/DisplayFiilters";
+import { AvailableStatuses } from "../src/components/productCatalog/AvailableFilters";
+import { SelectedFilters as SelectedFilters } from "../src/components/productCatalog/DisplayFiilters";
 import { AppBody } from "../src/components/layout/AppBody";
 import ProductsCatalog from "../src/components/productCatalog/ProductCatalog";
 import { ProductCatalogPagination } from "../src/components/productCatalog/ProductCatalogPagination";
@@ -7,8 +7,8 @@ import { ProductCatalogPagination } from "../src/components/productCatalog/Produ
 const Search: React.FC = () => {
   return (
     <AppBody>
-      <AvailableFilters />
-      <DisplayFilters />
+      <AvailableStatuses />
+      <SelectedFilters />
       <ProductsCatalog />
       <ProductCatalogPagination />
     </AppBody>

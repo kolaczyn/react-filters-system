@@ -1,13 +1,13 @@
-import { FiltersContext } from "./useFilters";
 import { useContext } from "react";
+import { FiltersContext } from "./useFilters";
 import useFiltersApi from "../api/useFiltersApi";
 
-type DisplayFilterData = {
+type SelectedFilter = {
   text: string;
   onClose: () => any;
 };
 
-export const useDisplayFilters = (): DisplayFilterData[] => {
+export const useSelectedFilters = (): SelectedFilter[] => {
   const { state, dispatch } = useContext(FiltersContext);
   const { isLoading, data } = useFiltersApi();
 
@@ -18,18 +18,17 @@ export const useDisplayFilters = (): DisplayFilterData[] => {
     dispatch({ type: "SET_SEARCH", payload: "" });
   };
 
-  const searchDisplayFilter = {
+  const searchFilter = {
     text: state.search,
     onClose: handleCloseSearch,
   };
-  const statusesDisplayFilters: DisplayFilterData[] = isLoading
+
+  const statusFilters: SelectedFilter[] = isLoading
     ? []
     : state.statuses.map((statusId) => ({
         text: getFilterName(statusId),
         onClose: () => dispatch({ type: "REMOVE_STATUS", payload: statusId }),
       }));
 
-  return [searchDisplayFilter, ...statusesDisplayFilters].filter(
-    (d) => d.text !== ""
-  );
+  return [searchFilter, ...statusFilters].filter((d) => d.text !== "");
 };

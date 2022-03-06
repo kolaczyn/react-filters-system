@@ -1,14 +1,14 @@
-import { useDisplayFilters } from "../../hooks/useDisplayFilters";
+import { useSelectedFilters as useSelectedFilters } from "../../hooks/useSelectedFilters";
 
-export const DisplayFilters: React.FC = () => {
-  const displayFilters = useDisplayFilters();
+export const SelectedFilters: React.FC = () => {
+  const selectedFilters = useSelectedFilters();
 
   return (
     <>
-      {displayFilters.map((displayFilter) => (
-        <div key={displayFilter.text} style={{ marginLeft: 5, marginRight: 5 }}>
-          <span>{displayFilter.text}</span>
-          <button onClick={displayFilter.onClose}>x</button>
+      {selectedFilters.map((filter) => (
+        <div key={filter.text} style={{ marginLeft: 5, marginRight: 5 }}>
+          <span>{filter.text}</span>
+          <button onClick={filter.onClose}>x</button>
         </div>
       ))}
     </>
