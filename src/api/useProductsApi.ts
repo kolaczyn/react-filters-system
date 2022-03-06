@@ -4,25 +4,9 @@ import axios from "axios";
 import { stringify } from "query-string";
 import { FiltersContext } from "../hooks/useFilters";
 import { useContext, useEffect, useState } from "react";
-import { ParsedUrlQuery } from "querystring";
+import { ProductApiDto } from "./dtoTypes";
 
 const URL_PRODUCTS_API = "https://v5stg.rossmann.pl/products/v3/api/Products";
-
-type ProductsDto = {
-  oldPrice: number;
-  price: number;
-  id: number;
-  brand: string;
-  caption: string;
-};
-
-export type ProductApiDto = {
-  data: {
-    products: ProductsDto[];
-    totalCount: number;
-    totalPages: number;
-  };
-};
 
 export const makeRequestToProductApi = async (
   queryString: string

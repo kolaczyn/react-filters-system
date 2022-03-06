@@ -2,16 +2,8 @@ import { stringify } from "query-string";
 import { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { FiltersContext } from "../hooks/useFilters";
+import { FiltersDataDto, FiltersDto } from "./dtoTypes";
 
-type FiltersDto = {
-  id: string;
-  type: string;
-  name: string;
-}[];
-
-type FiltersDataDto = {
-  data: FiltersDto;
-};
 const FILTERS_API_URL =
   "https://v5stg.rossmann.pl/products/v2/api/Products/filters";
 
