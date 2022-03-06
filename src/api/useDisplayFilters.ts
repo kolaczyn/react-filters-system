@@ -13,7 +13,6 @@ export const useDisplayFilters = (): DisplayFilterData[] => {
 
   const getFilterName = (filterId): string | null =>
     isLoading ? null : data.find((f) => f.id === filterId)?.name;
-  console.log({ data, statuses: state.statuses });
 
   const handleCloseSearch = () => {
     dispatch({ type: "SET_SEARCH", payload: "" });
