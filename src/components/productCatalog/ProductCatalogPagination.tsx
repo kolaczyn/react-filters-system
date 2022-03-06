@@ -1,5 +1,5 @@
-import { useProductsApi } from "../api/useProductsApi";
-import { Pagination } from "./Pagination";
+import { useProductsApi } from "../../api/useProductsApi";
+import { Pagination } from "../common/Pagination";
 
 export const ProductCatalogPagination: React.FC = () => {
   const { data, isLoading } = useProductsApi();

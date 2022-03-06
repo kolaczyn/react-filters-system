@@ -1,4 +1,4 @@
-import { useProductsApi } from "../api/useProductsApi";
+import { useProductsApi } from "../../api/useProductsApi";
 import { ProductPane } from "./ProductPane";
 
 const ProductsCatalog: React.FC = () => {
