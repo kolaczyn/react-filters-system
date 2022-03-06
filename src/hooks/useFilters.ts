@@ -1,10 +1,12 @@
 import React from "react";
 
-type FiltersState = {
+export type FiltersState = {
   search?: string;
   priceFrom?: number;
   priceTo?: number;
   statuses: string[];
+  page: number;
+  pageSize: number;
 };
 
 export const initialStateFilters: FiltersState = {
@@ -12,6 +14,8 @@ export const initialStateFilters: FiltersState = {
   priceFrom: null,
   priceTo: null,
   statuses: [],
+  page: 1,
+  pageSize: 24,
 };
 
 type FilterActions =
@@ -33,7 +37,12 @@ type FilterActions =
   | {
       type: "REMOVE_STATUS";
       payload: string;
+    }
+  | {
+      type: "SET_PAGE";
+      payload: number;
     };
+
 export const filtersReducer = (
   state: FiltersState,
   action: FilterActions
@@ -47,13 +56,18 @@ export const filtersReducer = (
         search: action.payload,
       };
     case "SET_FILTERS":
-      return action.payload;
+      return { ...initialStateFilters, ...action.payload };
     case "ADD_STATUS":
       return { ...state, statuses: [...state.statuses, action.payload] };
     case "REMOVE_STATUS":
       return {
         ...state,
         statuses: state.statuses.filter((id) => id !== action.payload),
+      };
+    case "SET_PAGE":
+      return {
+        ...state,
+        page: action.payload,
       };
     default:
       return state;

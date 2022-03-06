@@ -1,3 +1,5 @@
+import { FiltersState } from "./../hooks/useFilters";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { stringify } from "query-string";
 import { FiltersContext } from "../hooks/useFilters";
@@ -31,19 +33,27 @@ export const makeRequestToProductApi = async (
 };
 
 export const useProductsApi = () => {
+  const router = useRouter();
+  const { dispatch } = useContext(FiltersContext);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<ProductApiDto>(null);
   const { state: filtersState } = useContext(FiltersContext);
 
   useEffect(() => {
+    const newFiltersState = router.query as unknown as FiltersState;
+    console.log(newFiltersState);
+    dispatch({ type: "SET_FILTERS", payload: newFiltersState });
+  }, [router.asPath]);
+
+  useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const queryString = stringify(filtersState);
+      const queryString = stringify(filtersState, { skipNull: true });
       const response = await makeRequestToProductApi(queryString);
       setData(response);
       setIsLoading(false);
     })();
-  }, [filtersState]);
+  }, [stringify(filtersState)]);
 
   return {
     isLoading,

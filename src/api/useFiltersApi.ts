@@ -34,7 +34,7 @@ const useFiltersApi = (): {
 
   useEffect(() => {
     (async () => {
-      const queryString = stringify(filtersState);
+      const queryString = stringify(filtersState, { skipNull: true });
       setIsLoading(true);
       const response = await makeRequestToFiltersApi(queryString);
       setData(response.data);
