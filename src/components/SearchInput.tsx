@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { FiltersContext } from "../api/useFilters";
+import { FiltersContext } from "../hooks/useFilters";
 
 const SearchInput: React.FC = ({}) => {
   const router = useRouter();
@@ -15,7 +15,7 @@ const SearchInput: React.FC = ({}) => {
   }, [search]);
 
   const handleClick = () => {
-    router.push(`/search?${text}`);
+    router.push(`/search?search=${text}`);
     dispatch({ type: "SET_SEARCH", payload: text });
   };
   return (

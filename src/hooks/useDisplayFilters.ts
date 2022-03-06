@@ -1,6 +1,6 @@
 import { FiltersContext } from "./useFilters";
 import { useContext } from "react";
-import useFiltersApi from "./useFiltersApi";
+import useFiltersApi from "../api/useFiltersApi";
 
 type DisplayFilterData = {
   text: string;

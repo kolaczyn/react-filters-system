@@ -3,7 +3,7 @@ import {
   filtersReducer,
   initialStateFilters,
   FiltersContext,
-} from "../api/useFilters";
+} from "../hooks/useFilters";
 
 type Props = {
   children: React.ReactNode;

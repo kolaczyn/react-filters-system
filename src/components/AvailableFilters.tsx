@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FiltersContext } from "../api/useFilters";
+import { FiltersContext } from "../hooks/useFilters";
 import useFiltersApi from "../api/useFiltersApi";
 
 export const AvailableFilters = () => {

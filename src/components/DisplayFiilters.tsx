@@ -1,4 +1,4 @@
-import { useDisplayFilters } from "../api/useDisplayFilters";
+import { useDisplayFilters } from "../hooks/useDisplayFilters";
 
 export const DisplayFilters: React.FC = () => {
   const displayFilters = useDisplayFilters();

@@ -1,7 +1,7 @@
 import { stringify } from "query-string";
 import { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { FiltersContext } from "./useFilters";
+import { FiltersContext } from "../hooks/useFilters";
 
 type FiltersDto = {
   id: string;

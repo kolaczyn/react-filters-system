@@ -1,4 +1,5 @@
 import { useProductsApi } from "../api/useProductsApi";
+import { ProductPane } from "./ProductPane";
 
 const ProductsCatalog: React.FC = () => {
   const { data, isLoading } = useProductsApi();
@@ -6,10 +7,8 @@ const ProductsCatalog: React.FC = () => {
     <h2>loading...</h2>
   ) : (
     <>
-      {data.data.products.map((p) => (
-        <h2 key={p.id}>
-          {p.brand} {p.caption}
-        </h2>
+      {data.data.products.map((product) => (
+        <ProductPane key={product.id} product={product} />
       ))}
     </>
   );
