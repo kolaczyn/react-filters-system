@@ -20,7 +20,6 @@ const PaginationLink: React.FC<PaginationLinkProps> = ({
 }) => {
   return (
     <Link href={href}>
-      {/* <a className={"button" + isActive ? " is-active" : ""}>{children}</a> */}
       <a className={"button" + (isActive ? " is-primary" : "")}>{children}</a>
     </Link>
   );
