@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { stringify } from "query-string";
 import { FiltersContext } from "../hooks/useFilters";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ProductApiDto } from "./dtoTypes";
 
 export const makeRequestToProductApi = async (
@@ -27,6 +27,7 @@ export const useProductsApi = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<ProductApiDto>(null);
   const { state: filtersState } = useContext(FiltersContext);
+  const cachedResponses = useRef<Record<string, ProductApiDto>>({});
 
   useEffect(() => {
     const { query } = router;
@@ -45,12 +46,18 @@ export const useProductsApi = () => {
   }, [router.asPath]);
 
   useEffect(() => {
+    const key = stringify(filtersState);
+    const cached = cachedResponses.current[key];
+    if (cached !== undefined) {
+      return setData(cached);
+    }
     (async () => {
       setIsLoading(true);
       const queryString = stringify(filtersState, { skipNull: true });
       const response = await makeRequestToProductApi(queryString);
       setData(response);
       setIsLoading(false);
+      cachedResponses.current = { ...cachedResponses.current, [key]: response };
     })();
   }, [stringify(filtersState)]);
 
