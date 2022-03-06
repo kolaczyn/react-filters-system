@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { paginationNums } from "../../helpers/paginationNums";
 
 type Props = {
   currentPage: number;
@@ -25,30 +26,31 @@ const PaginationLink: React.FC<PaginationLinkProps> = ({
   );
 };
 
-// <Link href={nthPageHref(currentPage - 1)}>
-//   <a className="button">{currentPage - 1}</a>
-// </Link>
+const TripleDotPage: React.FC = () => {
+  return <a className="button">...</a>;
+};
 
 export const Pagination: React.FC<Props> = ({
   currentPage,
   maxPage,
   nthPageHref,
 }) => {
-  const showFirstPageLink = currentPage === 1;
-  const isLastPage = currentPage === maxPage;
-
   return (
     <div>
       {/* TOOD will do for now */}
-      {[1, 2, maxPage - 1, maxPage].map((pageNum) => (
-        <PaginationLink
-          isActive={pageNum === currentPage}
-          href={nthPageHref(pageNum)}
-          key={pageNum}
-        >
-          {pageNum}
-        </PaginationLink>
-      ))}
+      {paginationNums(currentPage, maxPage).map((page) =>
+        page === "..." ? (
+          <TripleDotPage />
+        ) : (
+          <PaginationLink
+            isActive={page === currentPage}
+            href={nthPageHref(page)}
+            key={page}
+          >
+            {page}
+          </PaginationLink>
+        )
+      )}
     </div>
   );
 };
