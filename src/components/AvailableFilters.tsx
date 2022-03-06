@@ -25,7 +25,7 @@ export const AvailableFilters = () => {
       {data.map((filter) => (
         <button
           onClick={() => handleStatusClick(filter.id)}
-          className={isStatusActive(filter.id) ? `active` : ""}
+          className={isStatusActive(filter.id) ? `is-active button` : "button"}
           key={filter.id}
         >
           {filter.name}

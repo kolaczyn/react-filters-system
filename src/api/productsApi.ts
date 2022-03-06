@@ -18,10 +18,6 @@ export type ProductApiDto = {
   };
 };
 
-type Args = {
-  search: string;
-};
-
 export const makeRequestToProductApi = async (
   queryString: string
 ): Promise<ProductApiDto> => {

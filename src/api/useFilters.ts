@@ -1,4 +1,4 @@
-import React, { Reducer, useReducer } from "react";
+import React from "react";
 
 type FiltersState = {
   search?: string;
